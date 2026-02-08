@@ -139,7 +139,7 @@
         <div class="container is-max-desktop">
           <div class="columns is-centered">
             <div class="column has-text-centered">
-              <h1 class="title is-1 publication-title">
+              <h1 class="title is-1 publication-title" style="font-size:44px;">
                 Motion Prior Distillation in Time Reversal Sampling for Generative Inbetweening
               </h1>
 
@@ -210,7 +210,7 @@
               <img class="teaser-gif" src="static/videos/iclr26.gif" alt="MPD teaser animation" loading="lazy">
             </div>
             <p class="has-text-centered is-size-6 mt-3">
-              Generative inbetweening results on the DAVIS dataset using our MPD sampler.
+              Teaser: Generative inbetweening results on the DAVIS dataset using our MPD sampler.
             </p>
           </div>
         </div>
@@ -228,6 +228,97 @@
                 Recent progress in image-to-video (I2V) diffusion models has significantly advanced the field of generative inbetweening, which aims to generate semantically plausible frames between two keyframes. In particular, inference-time sampling strategies, which leverage the generative priors of large-scale pre-trained I2V models without additional training, have become increasingly popular. However, existing inference-time sampling, either fusing forward and backward paths in parallel or alternating them sequentially, often suffers from temporal discontinuities and undesired visual artifacts due to the misalignment between two generated paths. This is because each path follows the motion prior induced by its own conditioning frame. We thus propose Motion Prior Distillation (MPD), a simple yet effective inference-time distillation technique that suppresses bidirectional mismatch by distilling the motion residual of the forward path into the backward path. MPD alleviates the misalignment by reconstructing the denoised estimate of the backward path from distilled forward motion residual. With our method, we can deliberately avoid denoising end-conditioned path which causes the ambiguity of the path, and yield more temporally coherent inbetweening results with the forward motion prior. Our method can be applied to off-the-shelf inbetweening works without any modification of model parameters. We not only perform quantitative evaluations on standard benchmarks, but also conduct extensive user studies to demonstrate the effectiveness of our approach in practical scenarios.
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- Method -->
+    <section class="section method-section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Method</h2>
+            <p class="is-size-6" style="color: rgba(0,0,0,0.75);">
+              MPD distills the <b>forward motion residual</b> into the backward path to suppress bidirectional mismatch
+              during time-reversal sampling.
+              <span class="method-badge">training-free</span>
+              <span class="method-badge">inference-time</span>
+            </p>
+
+            <div class="columns is-variable is-5 mt-5">
+              <div class="column">
+                <div class="method-card">
+                  <h3>1) Forward Path</h3>
+                  <p>
+                    Generate a forward trajectory conditioned on the start frame and extract a motion residual that captures
+                    reliable temporal evolution.
+                  </p>
+                </div>
+              </div>
+              <div class="column">
+                <div class="method-card">
+                  <h3>2) Distill Motion Residual</h3>
+                  <p>
+                    Treat the forward motion residual as a supervision signal at inference time, without updating model parameters.
+                  </p>
+                </div>
+              </div>
+              <div class="column">
+                <div class="method-card">
+                  <h3>3) Backward Correction</h3>
+                  <p>
+                    Reconstruct the backward denoised estimate using the distilled residual to reduce temporal discontinuities
+                    and artifacts.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Minimal formula block (ASCII-safe) -->
+            <div class="method-eq">
+              <div style="font-weight:600; margin-bottom:0.35rem;">Core idea (informal)</div>
+              <div>
+                backward_update ← backward_update + λ · (forward_motion_residual)
+              </div>
+            </div>
+
+            <div class="method-steps">
+              <ol>
+                <li>Run the forward sampling path to obtain intermediate denoised estimates and a motion residual.</li>
+                <li>Run the backward path and inject the distilled residual at selected timesteps.</li>
+                <li>Output the inbetweening frames with the forward motion prior preserved and reduced mismatch artifacts.</li>
+              </ol>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Baseline Comparisons -->
+    <section class="section method-section" id="baseline">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Baseline Comparisons</h2>
+            <p class="is-size-6" style="color: var(--subtext); margin-bottom: 1rem;">
+              Videos are coming soon.
+            </p>
+
+            <div class="coming-soon-card">
+              <div class="coming-soon-icon">
+                <i class="fas fa-video"></i>
+              </div>
+              <div class="coming-soon-text">
+                <div class="coming-soon-title">Results will be uploaded shortly</div>
+                <div class="coming-soon-sub">
+                  We are preparing side-by-side videos for MPD and baselines (DAVIS).
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
