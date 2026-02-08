@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Primary Meta Tags -->
-  <title>Motion Prior Distillation in Time Reversal Sampling for Generative Inbetweening | ICLR 2026</title>
+  <title>Motion Prior Distillation | ICLR 2026</title>
   <meta name="title" content="Motion Prior Distillation in Time Reversal Sampling for Generative Inbetweening">
   <meta name="description" content="Training-free distillation that corrects motion bias in time-reversal sampling, enabling temporally consistent generative inbetweening with pre-trained video diffusion models.">
   <meta name="keywords" content="diffusion models, video diffusion, generative inbetweening, video interpolation, inference-time methods, training-free distillation, motion prior, temporal consistency">
@@ -47,9 +47,9 @@
   <link rel="preconnect" href="https://ajax.googleapis.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  <!-- Favicon (keep only if file exists) -->
+  <!-- <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico"> -->
 
   <!-- CSS -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -63,13 +63,44 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   </noscript>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Fonts (lighter set) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- JS -->
   <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="static/js/fontawesome.all.min.js"></script>
   <script defer src="static/js/index.js"></script>
+
+  <!-- Lighten typography + author color rules -->
+  <style>
+    body {
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-weight: 400;
+    }
+    .title, .publication-title {
+      font-weight: 600 !important;
+      letter-spacing: -0.02em;
+    }
+    .publication-authors { font-weight: 500; }
+    .content { font-weight: 400; }
+    .button { font-weight: 500; }
+
+    /* Author links: orange */
+    .publication-authors .author-block a {
+      color: #f97316 !important;
+    }
+    .publication-authors .author-block a:hover {
+      color: #ea580c !important;
+    }
+
+    /* Exception: lab link stays blue */
+    .publication-authors a.lab-link {
+      color: #2563eb !important;
+    }
+    .publication-authors a.lab-link:hover {
+      color: #1d4ed8 !important;
+    }
+  </style>
 
   <!-- Structured Data (minimal, no images) -->
   <script type="application/ld+json">
@@ -94,7 +125,7 @@
 </head>
 
 <body>
-  <!-- Scroll to Top Button (kept; harmless if index.js defines scrollToTop) -->
+  <!-- Scroll to Top Button (works only if scrollToTop() exists in index.js) -->
   <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
     <i class="fas fa-chevron-up"></i>
   </button>
@@ -126,8 +157,11 @@
               </div>
 
               <div class="is-size-5 publication-authors">
-                <span class="author-block">Visual AI Lab, Yonsei University<br>ICLR 2026</span>
-                </div>
+                <span class="author-block">
+                  <a class="lab-link" href="https://sites.google.com/site/hgjeoncv/" target="_blank" rel="noopener">Visual AI Lab</a>,
+                  Yonsei University<br>🌈 ICLR 2026
+                </span>
+              </div>
 
               <div class="column has-text-centered">
                 <div class="publication-links">
@@ -173,11 +207,8 @@
           <div class="column is-four-fifths">
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified">
-              <!-- Replace this with your real abstract -->
               <p>
-                We propose Motion Prior Distillation (MPD), a training-free inference-time method that corrects motion bias
-                in time-reversal sampling for generative inbetweening. MPD improves temporal consistency and reduces
-                artifacts when generating intermediate frames between two keyframes using pre-trained video diffusion models.
+                Recent progress in image-to-video (I2V) diffusion models has significantly advanced the field of generative inbetweening, which aims to generate semantically plausible frames between two keyframes. In particular, inference-time sampling strategies, which leverage the generative priors of large-scale pre-trained I2V models without additional training, have become increasingly popular. However, existing inference-time sampling, either fusing forward and backward paths in parallel or alternating them sequentially, often suffers from temporal discontinuities and undesired visual artifacts due to the misalignment between two generated paths. This is because each path follows the motion prior induced by its own conditioning frame. We thus propose Motion Prior Distillation (MPD), a simple yet effective inference-time distillation technique that suppresses bidirectional mismatch by distilling the motion residual of the forward path into the backward path. MPD alleviates the misalignment by reconstructing the denoised estimate of the backward path from distilled forward motion residual. With our method, we can deliberately avoid denoising end-conditioned path which causes the ambiguity of the path, and yield more temporally coherent inbetweening results with the forward motion prior. Our method can be applied to off-the-shelf inbetweening works without any modification of model parameters. We not only perform quantitative evaluations on standard benchmarks, but also conduct extensive user studies to demonstrate the effectiveness of our approach in practical scenarios.
               </p>
             </div>
           </div>
@@ -206,26 +237,6 @@
       </div>
     </section>
 
-    <footer class="footer">
-      <div class="container">
-        <div class="columns is-centered">
-          <div class="column is-8">
-            <div class="content">
-              <p>
-                This page was built using the
-                <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a>,
-                adopted from the <a href="https://nerfies.github.io" target="_blank" rel="noopener">Nerfies</a> project page.
-                <br>
-                Licensed under a
-                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">
-                  Creative Commons Attribution-ShareAlike 4.0 International License
-                </a>.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
   </main>
 </body>
 </html>
