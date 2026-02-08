@@ -102,6 +102,11 @@
       display: block;
       background: #000;
     }
+    .figure-bullets .check{
+      color: #e53935;   /* 빨강 */
+      font-weight: 700;
+      margin-right: 0.35rem;
+    }
   </style>
 
   <!-- Structured Data -->
@@ -253,7 +258,7 @@
                    loading="lazy">
             </div>
             <figcaption class="figure-caption">
-              Existing time-reversal sampling methods simply connect the two temporal paths
+              Existing time reversal sampling methods simply connect the two temporal paths
               either by (a) linearly fusing them or (b) alternatively denoising each path.
             </figcaption>
           </figure>
@@ -261,16 +266,16 @@
           <!-- Figure 2 -->
           <figure class="method-figure">
             <div class="figure-wrap">
-              <img src="static/images/figure2.png"
+              <img src="static/images/figure3.png"
                    alt="Our MPD: distill forward motion residual into backward path"
                    loading="lazy">
             </div>
             <figcaption class="figure-caption">
               <b>Motion Prior Distillation (MPD)</b> reconstructs the backward trajectory by distilling the forward motion prior.
               <div class="figure-bullets">
-                <div>✓ <b>Unified motion prior</b>: Reducing motion conflicts between forward and backward paths</div>
-                <div>✓ <b>Computationally efficient</b>: Inference-time prior distillation without any model modification</div>
-                <div>✓ <b>More coherent videos</b>: Improving temporal consistency and perceptual quality, verified by extensive experiments</div>
+                <div><span class="check">✓</span> <b>Unified motion prior</b>: Reducing motion conflicts between forward and backward paths</div>
+                <div><span class="check">✓</span> <b>Computationally efficient</b>: Inference-time prior distillation without any model modification</div>
+                <div><span class="check">✓</span> <b>More coherent videos</b>: Improving temporal consistency and perceptual quality, verified by extensive experiments</div>
               </div>
             </figcaption>
           </figure>

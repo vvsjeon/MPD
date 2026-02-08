@@ -1,1 +1,1 @@
-**Motion Prior Distillation in Time Reversal Sampling for Generative Inbetweening (ICLR 2026)**  
+**Project Page for "Motion Prior Distillation in Time Reversal Sampling for Generative Inbetweening (ICLR 2026)"**  
