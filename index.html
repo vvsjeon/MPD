@@ -234,50 +234,51 @@
     </section>
 
     
-    <!-- Method -->
-    <section class="section method-section" id="method">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-four-fifths">
-            <h2 class="title is-3">Method</h2>
+<!-- Method -->
+<section class="section method-section" id="method">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
 
-            <p class="is-size-6" style="color: rgba(0,0,0,0.75); margin-bottom: 1.25rem;">
-              We suppress bidirectional mismatch in time-reversal sampling by distilling the forward motion residual into the backward path.
-              For more details, please refer to our paper and code.
-            </p>
+        <p class="is-size-6" style="color: rgba(0,0,0,0.75); margin-bottom: 1.25rem;"></p>
 
-            <div class="method-figs">
-              <!-- Figure 1 -->
-              <figure class="method-figure">
-                <div class="figure-wrap">
-                  <img src="static/images/carousel1.jpg"
-                      alt="Existing time-reversal sampling without motion prior alignment"
-                      loading="lazy">
-                </div>
-                <figcaption>
-                  <b>Existing.</b> Time-reversal sampling connects two temporal paths without aligning motion priors,
-                  often causing temporal discontinuities and artifacts.
-                </figcaption>
-              </figure>
+        <div class="method-figs">
 
-              <!-- Figure 2 -->
-              <figure class="method-figure">
-                <div class="figure-wrap">
-                  <img src="static/images/carousel2.jpg"
-                      alt="Our MPD: distill forward motion residual into backward path"
-                      loading="lazy">
-                </div>
-                <figcaption>
-                  <b>Ours (MPD).</b> We distill the <i>forward motion residual</i> and inject it into the backward path,
-                  improving temporal consistency.
-                </figcaption>
-              </figure>
+          <!-- Figure 1 -->
+          <figure class="method-figure">
+            <div class="figure-wrap">
+              <img src="static/images/figure1.png"
+                   alt="Existing time-reversal sampling without motion prior alignment"
+                   loading="lazy">
             </div>
+            <figcaption class="figure-caption">
+              Existing time-reversal sampling methods simply connect the two temporal paths
+              either by (a) linearly fusing them or (b) alternatively denoising each path.
+            </figcaption>
+          </figure>
 
-          </div>
+          <!-- Figure 2 -->
+          <figure class="method-figure">
+            <div class="figure-wrap">
+              <img src="static/images/figure2.png"
+                   alt="Our MPD: distill forward motion residual into backward path"
+                   loading="lazy">
+            </div>
+            <figcaption class="figure-caption">
+              <b>Motion Prior Distillation (MPD)</b> reconstructs the backward trajectory by distilling the forward motion prior.
+              <div class="figure-bullets">
+                <div>✓ <b>Unified motion prior</b>: Reducing motion conflicts between forward and backward paths</div>
+                <div>✓ <b>Computationally efficient</b>: Inference-time prior distillation without any model modification</div>
+                <div>✓ <b>More coherent videos</b>: Improving temporal consistency and perceptual quality, verified by extensive experiments</div>
+              </div>
+            </figcaption>
+          </figure>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
     <!-- Baseline Comparisons -->
     <section class="hero is-light baseline-hero" id="baseline">
