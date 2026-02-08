@@ -20,7 +20,7 @@
   <meta property="og:description" content="Training-free distillation that corrects motion bias in time-reversal sampling, enabling temporally consistent generative inbetweening with pre-trained video diffusion models.">
   <meta property="og:url" content="https://vvsjeon.github.io/MPD/">
 
-  <!-- Twitter (no image card) -->
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Motion Prior Distillation in Time Reversal Sampling for Generative Inbetweening">
   <meta name="twitter:description" content="Training-free distillation that corrects motion bias in time-reversal sampling, enabling temporally consistent generative inbetweening with pre-trained video diffusion models.">
@@ -47,10 +47,6 @@
   <link rel="preconnect" href="https://ajax.googleapis.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-  <!-- Favicon (keep only if file exists) -->
-  <!-- <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico"> -->
-
   <!-- CSS -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
@@ -63,7 +59,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   </noscript>
 
-  <!-- Fonts (lighter set) -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- JS -->
@@ -71,7 +67,7 @@
   <script defer src="static/js/fontawesome.all.min.js"></script>
   <script defer src="static/js/index.js"></script>
 
-  <!-- Lighten typography + author color rules -->
+  <!-- Typography + colors + spacing -->
   <style>
     body {
       font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -85,24 +81,30 @@
     .content { font-weight: 400; }
     .button { font-weight: 500; }
 
-    /* Author links: orange */
-    .publication-authors .author-block a {
-      color: #f97316 !important;
-    }
-    .publication-authors .author-block a:hover {
-      color: #ea580c !important;
-    }
+    /* Author links: muted orange */
+    .publication-authors a { color: #f97316 !important; }
+    .publication-authors a:hover { color: #ea580c !important; }
 
-    /* Exception: lab link stays blue */
-    .publication-authors a.lab-link {
-      color: #2563eb !important;
+    /* Reduce gap between hero and teaser */
+    .hero { margin-bottom: 0 !important; }
+    .hero .hero-body { padding-bottom: 1rem !important; }
+
+    /* Teaser */
+    .teaser-section { padding-top: 0.75rem !important; padding-bottom: 1.25rem !important; }
+    .teaser-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
     }
-    .publication-authors a.lab-link:hover {
-      color: #1d4ed8 !important;
+    .teaser-gif {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #000;
     }
   </style>
 
-  <!-- Structured Data (minimal, no images) -->
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -143,22 +145,22 @@
 
               <div class="is-size-5 publication-authors">
                 <span class="author-block">
-                  <a href="https://vvsjeon.github.io" target="_blank" rel="noopener">Wooseok Jeon</a>,
+                  <a href="https://vvsjeon.github.io" target="_blank" rel="noopener">Wooseok Jeon</a><sup>1</sup>,
                 </span>
                 <span class="author-block">
-                  <a href="https://www.seunghyunshin.com" target="_blank" rel="noopener">Seunghyun Shin</a>,
+                  <a href="https://www.seunghyunshin.com" target="_blank" rel="noopener">Seunghyun Shin</a><sup>2</sup>,
                 </span>
                 <span class="author-block">
-                  <a href="#" target="_blank" rel="noopener">Dongmin Shin</a>,
+                  <a href="#" target="_blank" rel="noopener">Dongmin Shin</a><sup>1</sup>,
                 </span>
                 <span class="author-block">
-                  <a href="https://sites.google.com/site/hgjeoncv/" target="_blank" rel="noopener">Hae-Gon Jeon</a>
+                  <a href="https://sites.google.com/site/hgjeoncv/" target="_blank" rel="noopener">Hae-Gon Jeon</a><sup>1</sup>
                 </span>
               </div>
 
               <div class="is-size-5 publication-authors">
                 <span class="author-block">
-                  Yonsei University<br>🌈 ICLR 2026
+                  <sup>1</sup>Yonsei University &nbsp; <sup>2</sup>GIST<br>🌈 ICLR 2026
                 </span>
               </div>
 
@@ -200,7 +202,7 @@
     </section>
 
     <!-- Teaser (GIF) -->
-    <section class="section">
+    <section class="section teaser-section">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column is-full">
@@ -208,7 +210,7 @@
               <img class="teaser-gif" src="static/videos/iclr26.gif" alt="MPD teaser animation" loading="lazy">
             </div>
             <p class="has-text-centered is-size-6 mt-3">
-              MPD distills forward motion residuals to improve temporal coherence in generative inbetweening.
+              Generative inbetweening results on the DAVIS dataset using our MPD sampler.
             </p>
           </div>
         </div>
