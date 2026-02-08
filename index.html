@@ -235,61 +235,43 @@
 
     
     <!-- Method -->
-    <section class="section method-section">
+    <section class="section method-section" id="method">
       <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
           <div class="column is-four-fifths">
             <h2 class="title is-3">Method</h2>
-            <p class="is-size-6" style="color: rgba(0,0,0,0.75);">
-              MPD distills the <b>forward motion residual</b> into the backward path to suppress bidirectional mismatch
-              during time-reversal sampling.
-              <span class="method-badge">training-free</span>
-              <span class="method-badge">inference-time</span>
+
+            <p class="is-size-6" style="color: rgba(0,0,0,0.75); margin-bottom: 1.25rem;">
+              We suppress bidirectional mismatch in time-reversal sampling by distilling the forward motion residual into the backward path.
+              For more details, please refer to our paper and code.
             </p>
 
-            <div class="columns is-variable is-5 mt-5">
-              <div class="column">
-                <div class="method-card">
-                  <h3>1) Forward Path</h3>
-                  <p>
-                    Generate a forward trajectory conditioned on the start frame and extract a motion residual that captures
-                    reliable temporal evolution.
-                  </p>
+            <div class="method-figs">
+              <!-- Figure 1 -->
+              <figure class="method-figure">
+                <div class="figure-wrap">
+                  <img src="static/images/carousel1.jpg"
+                      alt="Existing time-reversal sampling without motion prior alignment"
+                      loading="lazy">
                 </div>
-              </div>
-              <div class="column">
-                <div class="method-card">
-                  <h3>2) Distill Motion Residual</h3>
-                  <p>
-                    Treat the forward motion residual as a supervision signal at inference time, without updating model parameters.
-                  </p>
-                </div>
-              </div>
-              <div class="column">
-                <div class="method-card">
-                  <h3>3) Backward Correction</h3>
-                  <p>
-                    Reconstruct the backward denoised estimate using the distilled residual to reduce temporal discontinuities
-                    and artifacts.
-                  </p>
-                </div>
-              </div>
-            </div>
+                <figcaption>
+                  <b>Existing.</b> Time-reversal sampling connects two temporal paths without aligning motion priors,
+                  often causing temporal discontinuities and artifacts.
+                </figcaption>
+              </figure>
 
-            <!-- Minimal formula block (ASCII-safe) -->
-            <div class="method-eq">
-              <div style="font-weight:600; margin-bottom:0.35rem;">Core idea (informal)</div>
-              <div>
-                backward_update ← backward_update + λ · (forward_motion_residual)
-              </div>
-            </div>
-
-            <div class="method-steps">
-              <ol>
-                <li>Run the forward sampling path to obtain intermediate denoised estimates and a motion residual.</li>
-                <li>Run the backward path and inject the distilled residual at selected timesteps.</li>
-                <li>Output the inbetweening frames with the forward motion prior preserved and reduced mismatch artifacts.</li>
-              </ol>
+              <!-- Figure 2 -->
+              <figure class="method-figure">
+                <div class="figure-wrap">
+                  <img src="static/images/carousel2.jpg"
+                      alt="Our MPD: distill forward motion residual into backward path"
+                      loading="lazy">
+                </div>
+                <figcaption>
+                  <b>Ours (MPD).</b> We distill the <i>forward motion residual</i> and inject it into the backward path,
+                  improving temporal consistency.
+                </figcaption>
+              </figure>
             </div>
 
           </div>
@@ -298,27 +280,25 @@
     </section>
 
     <!-- Baseline Comparisons -->
-    <section class="section method-section" id="baseline">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-four-fifths">
-            <h2 class="title is-3">Baseline Comparisons</h2>
-            <p class="is-size-6" style="color: var(--subtext); margin-bottom: 1rem;">
-              Videos are coming soon.
-            </p>
-
-            <div class="coming-soon-card">
-              <div class="coming-soon-icon">
-                <i class="fas fa-video"></i>
-              </div>
-              <div class="coming-soon-text">
-                <div class="coming-soon-title">Results will be uploaded shortly</div>
-                <div class="coming-soon-sub">
-                  We are preparing side-by-side videos for MPD and baselines (DAVIS).
+    <section class="hero is-light baseline-hero" id="baseline">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Baseline Comparisons</h2>
+              <div class="coming-soon-card">
+                <div class="coming-soon-icon">
+                  <i class="fas fa-video"></i>
+                </div>
+                <div class="coming-soon-text">
+                  <div class="coming-soon-title">Results will be uploaded shortly</div>
+                  <div class="coming-soon-sub">
+                    We are preparing side-by-side videos for MPD and baselines.
+                  </div>
                 </div>
               </div>
-            </div>
 
+            </div>
           </div>
         </div>
       </div>
@@ -335,12 +315,12 @@
           </button>
         </div>
 
-        <pre id="bibtex-code"><code>@inproceedings{jeon2026mpd,
-  title     = {Motion Prior Distillation in Time Reversal Sampling for Generative Inbetweening},
-  author    = {Jeon, Wooseok and Shin, Seunghyun and Shin, Dongmin and Jeon, Hae-Gon},
-  booktitle = {International Conference on Learning Representations (ICLR)},
-  year      = {2026},
-  url       = {https://openreview.net/forum?id=GRElsj9W2t}
+<pre id="bibtex-code"><code>@inproceedings{anonymous2026motion,
+  title={Motion Prior Distillation in Time Reversal Sampling for Generative Inbetweening},
+  author={Anonymous},
+  booktitle={The Fourteenth International Conference on Learning Representations},
+  year={2026},
+  url={https://openreview.net/forum?id=GRElsj9W2t}
 }</code></pre>
       </div>
     </section>
