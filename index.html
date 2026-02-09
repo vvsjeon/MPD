@@ -102,6 +102,12 @@
       display: block;
       background: #000;
     }
+    .teaser-video{
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;  /* 원하면 */
+    }
     .figure-bullets .check{
       color: #e53935;   /* 빨강 */
       font-weight: 700;
@@ -210,13 +216,21 @@
       </div>
     </section>
 
-    <!-- Teaser (GIF) -->
+    <!-- Teaser (MP4) -->
     <section class="section teaser-section">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column is-full">
             <div class="teaser-wrap">
-              <img class="teaser-gif" src="static/videos/iclr26.gif" alt="MPD teaser animation" loading="lazy">
+              <video
+                class="teaser-video"
+                src="static/videos/teaser.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+              ></video>
             </div>
             <p class="has-text-centered is-size-6 mt-3">
               Teaser: Generative inbetweening results on the DAVIS dataset using our MPD sampler.
