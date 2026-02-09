@@ -298,7 +298,10 @@
             </div>
             <figcaption class="figure-caption">
               Existing time reversal sampling methods simply connect the two temporal paths
-              either by (a) linearly fusing them or (b) alternatively denoising each path.
+              either by (a) linearly fusing them or (b) alternatively denoising each path. 
+              However, incompatible motion priors induced by two frame conditions 
+              could introduce the ambiguity between the two denoising paths.
+              <br><br>
             </figcaption>
           </figure>
 
@@ -310,7 +313,8 @@
                    loading="lazy">
             </div>
             <figcaption class="figure-caption">
-              <b>Motion Prior Distillation (MPD)</b> reconstructs the backward path by distilling the forward motion prior.
+              <b>Motion Prior Distillation (MPD)</b> aligns the backward path with the forward one by distilling the forward motion residual.
+
               <div class="figure-bullets">
                 <div><span class="check">✓</span> <b>Unified motion prior</b>: Reducing motion conflicts between forward and backward paths</div>
                 <div><span class="check">✓</span> <b>Computationally efficient</b>: Inference-time prior distillation without any model modification</div>
