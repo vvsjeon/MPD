@@ -108,6 +108,22 @@
       display: block;
       border-radius: 12px;  /* 원하면 */
     }
+    /* Teaser caption typography */
+    .teaser-caption{
+      font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: 1.15rem;          /* 더 크게 */
+      line-height: 1.5;
+      font-weight: 600;            /* 굵게 */
+      letter-spacing: -0.01em;
+      color: rgba(0,0,0,0.82);     /* 살짝 더 진하게 */
+      margin-top: 0.9rem !important;
+    }
+
+    /* 강조하고 싶은 단어에 쓰기 */
+    .teaser-caption .accent{
+      color: #111827;              /* 거의 블랙 */
+      font-weight: 700;
+    }
     .figure-bullets .check{
       color: #e53935;   /* 빨강 */
       font-weight: 700;
@@ -289,11 +305,11 @@
                    loading="lazy">
             </div>
             <figcaption class="figure-caption">
-              <b>Motion Prior Distillation (MPD)</b> reconstructs the backward trajectory by distilling the forward motion prior.
+              <b>Motion Prior Distillation (MPD)</b> reconstructs the backward path by distilling the forward motion prior.
               <div class="figure-bullets">
                 <div><span class="check">✓</span> <b>Unified motion prior</b>: Reducing motion conflicts between forward and backward paths</div>
                 <div><span class="check">✓</span> <b>Computationally efficient</b>: Inference-time prior distillation without any model modification</div>
-                <div><span class="check">✓</span> <b>More coherent videos</b>: Improving temporal consistency and perceptual quality, verified by extensive experiments</div>
+                <div><span class="check">✓</span> <b>More coherent videos</b>: Improving temporal consistency and perceptual quality</div>
               </div>
             </figcaption>
           </figure>
