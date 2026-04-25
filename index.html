@@ -229,7 +229,7 @@
     .row-video {
       width: 100%;
       display: block;
-      border-radius: 8px;
+      border-radius: 0;
       background: #000;
     }
     .comparison-display { transition: opacity 0.2s ease; }
@@ -487,36 +487,36 @@
      Video files expected at: static/videos/comparisons/{id}/Row1.mp4 and Row2.mp4 */
   const SCENES = [
     // DAVIS dataset
-    { id: 'fig1',  label: 'Car-Turn',      group: 'DAVIS',  caption: 'car-turn (DAVIS) — Fig. 1 in main paper' },
-    { id: 'fig6',  label: 'Gold-Fish',     group: 'DAVIS',  caption: 'gold-fish (DAVIS)' },
-    { id: 'fig8',  label: 'Train',         group: 'DAVIS',  caption: 'train (DAVIS)' },
-    { id: 'fig9',  label: 'Kite-Surf',     group: 'DAVIS',  caption: 'kite-surf (DAVIS)' },
-    { id: 'fig13', label: 'Dancing',       group: 'DAVIS',  caption: 'dancing (DAVIS)' },
-    { id: 'fig14', label: 'Guitar-Violin', group: 'DAVIS',  caption: 'guitar-violin (DAVIS)' },
+    { id: 'fig1',  label: 'Car-Turn',      group: 'DAVIS',  ref: 'Fig. 1 in main paper' },
+    { id: 'fig6',  label: 'Gold-Fish',     group: 'DAVIS',  ref: '' },
+    { id: 'fig8',  label: 'Train',         group: 'DAVIS',  ref: '' },
+    { id: 'fig9',  label: 'Kite-Surf',     group: 'DAVIS',  ref: '' },
+    { id: 'fig13', label: 'Dancing',       group: 'DAVIS',  ref: '' },
+    { id: 'fig14', label: 'Guitar-Violin', group: 'DAVIS',  ref: '' },
     // Pexels dataset
-    { id: 'fig2',  label: 'Pexels A',      group: 'Pexels', caption: 'Pexels — Fig. 3 (rows 1–3) in main paper' },
-    { id: 'fig3',  label: 'Pexels B',      group: 'Pexels', caption: 'Pexels — Fig. 3 (rows 4–6) in main paper' },
-    { id: 'fig4',  label: 'Pexels C',      group: 'Pexels', caption: 'Pexels' },
-    { id: 'fig5',  label: 'Pexels D',      group: 'Pexels', caption: 'Pexels' },
-    { id: 'fig7',  label: 'Pexels E',      group: 'Pexels', caption: 'Pexels' },
-    { id: 'fig10', label: 'Pexels F',      group: 'Pexels', caption: 'Pexels' },
-    { id: 'fig11', label: 'Pexels G',      group: 'Pexels', caption: 'Pexels' },
-    { id: 'fig12', label: 'Pexels H',      group: 'Pexels', caption: 'Pexels' },
+    { id: 'fig2',  label: 'Pexels A',      group: 'Pexels', ref: 'Fig. 3 (rows 1–3) in main paper' },
+    { id: 'fig3',  label: 'Pexels B',      group: 'Pexels', ref: 'Fig. 3 (rows 4–6) in main paper' },
+    { id: 'fig4',  label: 'Pexels C',      group: 'Pexels', ref: '' },
+    { id: 'fig5',  label: 'Pexels D',      group: 'Pexels', ref: '' },
+    { id: 'fig7',  label: 'Pexels E',      group: 'Pexels', ref: '' },
+    { id: 'fig10', label: 'Pexels F',      group: 'Pexels', ref: '' },
+    { id: 'fig11', label: 'Pexels G',      group: 'Pexels', ref: '' },
+    { id: 'fig12', label: 'Pexels H',      group: 'Pexels', ref: '' },
   ];
 
   const ROW1 = [
-    { label: 'Start Frame',      isFrame: true },
-    { label: '(a) FILM' },
-    { label: '(b) DynamiCrafter' },
-    { label: '(c) TRF' },
-    { label: '(d) GI' },
+    { label: 'Start Frame',  isFrame: true },
+    { label: 'FILM' },
+    { label: 'DynamiCrafter' },
+    { label: 'TRF' },
+    { label: 'GI' },
   ];
   const ROW2 = [
-    { label: 'End Frame',        isFrame: true },
-    { label: '(e) ViBiD' },
-    { label: '(f) FCVG' },
-    { label: '(g) Ours + TRF',   isOurs: true },
-    { label: '(h) Ours + ViBiD', isOurs: true },
+    { label: 'End Frame',    isFrame: true },
+    { label: 'ViBiD' },
+    { label: 'FCVG' },
+    { label: 'Ours + TRF',   isOurs: true },
+    { label: 'Ours + ViBiD', isOurs: true },
   ];
 
   const VIDEO_BASE = 'static/videos/comparisons';
@@ -559,7 +559,7 @@
       return `
         <div class="comparison-card">
           <div class="comparison-caption">
-            Scene: <span class="scene-name">${scene.label}</span> — ${scene.caption}
+            Scene: <span class="scene-name">${scene.label}</span>${scene.ref ? ` (${scene.ref})` : ''}
           </div>
           <div class="comparison-row">
             <div class="row-headers">${renderHeaderCells(ROW1)}</div>
