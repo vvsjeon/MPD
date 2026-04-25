@@ -135,6 +135,111 @@
     }
     .method-section { text-align: left; }
     .method-section .figure-wrap { text-align: center; } /* 이미지만 가운데 */
+
+    /* ===== Baseline Comparisons ===== */
+    .baseline-hero { background-color: #fafafa; }
+
+    .scene-group {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+    .scene-group-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #6b7280;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-right: 0.4rem;
+      min-width: 60px;
+      text-align: right;
+    }
+    .scene-tab {
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      border: 1.5px solid #e5e7eb;
+      background: white;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 500;
+      font-size: 0.88rem;
+      color: #374151;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+    }
+    .scene-tab:hover { border-color: #f97316; color: #f97316; }
+    .scene-tab.is-active {
+      background: #f97316;
+      border-color: #f97316;
+      color: white;
+      box-shadow: 0 4px 14px rgba(249,115,22,0.28);
+    }
+
+    .comparison-card {
+      background: white;
+      border-radius: 14px;
+      padding: 1.25rem 1.25rem 1.5rem;
+      margin-top: 1.25rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      border: 1px solid #f1f1f1;
+    }
+    .comparison-caption {
+      font-size: 0.92rem;
+      color: #4b5563;
+      text-align: center;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+    .comparison-caption .scene-name {
+      font-style: normal;
+      font-weight: 600;
+      color: #111827;
+    }
+    .comparison-row { margin-bottom: 0.5rem; }
+    .comparison-row:last-child { margin-bottom: 0; }
+    .row-headers {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #4b5563;
+      margin-bottom: 0.25rem;
+    }
+    .row-header {
+      text-align: center;
+      padding: 0.45rem 0.3rem 0.55rem;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .row-header.is-frame {
+      color: #9ca3af;
+      font-weight: 500;
+      font-style: italic;
+    }
+    .row-header.is-ours {
+      color: #f97316;
+      font-weight: 700;
+      background: rgba(249,115,22,0.07);
+      border-radius: 6px 6px 0 0;
+      border-bottom: 2px solid #f97316;
+    }
+    .row-video {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      background: #000;
+    }
+    .comparison-display { transition: opacity 0.2s ease; }
+    .comparison-display.is-changing { opacity: 0.4; }
+
+    @media (max-width: 768px) {
+      .scene-group-label { min-width: auto; text-align: center; flex-basis: 100%; margin-bottom: 0.2rem; }
+      .row-header { font-size: 0.7rem; padding: 0.3rem 0.15rem; }
+      .comparison-card { padding: 0.9rem; }
+    }
   </style>
 
   <!-- Structured Data -->
@@ -333,19 +438,18 @@
     <section class="hero is-light baseline-hero" id="baseline">
       <div class="hero-body">
         <div class="container is-max-desktop">
-          <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths">
-              <h2 class="title is-3">Baseline Comparisons</h2>
-              <div class="coming-soon-card">
-                <div class="coming-soon-icon">
-                  <i class="fas fa-video"></i>
-                </div>
-                <div class="coming-soon-text">
-                  <div class="coming-soon-sub">
-                    We are preparing side-by-side videos for MPD and baselines!
-                  </div>
-                </div>
-              </div>
+          <div class="columns is-centered">
+            <div class="column is-full">
+              <h2 class="title is-3 has-text-centered">Baseline Comparisons</h2>
+              <p class="has-text-centered" style="color: rgba(0,0,0,0.7); margin-bottom: 1.5rem;">
+                Qualitative results across DAVIS and Pexels datasets. Click a scene below to compare methods.
+              </p>
+
+              <!-- Scene tabs (rendered by JS) -->
+              <div id="scene-tabs"></div>
+
+              <!-- Comparison display (rendered by JS) -->
+              <div class="comparison-display" id="comparison-display"></div>
 
             </div>
           </div>
@@ -364,9 +468,10 @@
           </button>
         </div>
 
-<pre id="bibtex-code"><code>@inproceedings{anonymous2026motion,
+<pre id="bibtex-code"><code>@inproceedings{
+  jeon2026motion,
   title={Motion Prior Distillation in Time Reversal Sampling for Generative Inbetweening},
-  author={Anonymous},
+  author={Wooseok Jeon and Seunghyun Shin and Dongmin Shin and Hae-Gon Jeon},
   booktitle={The Fourteenth International Conference on Learning Representations},
   year={2026},
   url={https://openreview.net/forum?id=GRElsj9W2t}
@@ -375,5 +480,134 @@
     </section>
 
   </main>
+
+  <!-- ===== Baseline Comparisons script ===== -->
+  <script>
+  /* Edit SCENES below to customize labels, ordering, or remove entries.
+     Video files expected at: static/videos/comparisons/{id}/Row1.mp4 and Row2.mp4 */
+  const SCENES = [
+    // DAVIS dataset
+    { id: 'fig1',  label: 'Car-Turn',      group: 'DAVIS',  caption: 'car-turn (DAVIS) — Fig. 1 in main paper' },
+    { id: 'fig6',  label: 'Gold-Fish',     group: 'DAVIS',  caption: 'gold-fish (DAVIS)' },
+    { id: 'fig8',  label: 'Train',         group: 'DAVIS',  caption: 'train (DAVIS)' },
+    { id: 'fig9',  label: 'Kite-Surf',     group: 'DAVIS',  caption: 'kite-surf (DAVIS)' },
+    { id: 'fig13', label: 'Dancing',       group: 'DAVIS',  caption: 'dancing (DAVIS)' },
+    { id: 'fig14', label: 'Guitar-Violin', group: 'DAVIS',  caption: 'guitar-violin (DAVIS)' },
+    // Pexels dataset
+    { id: 'fig2',  label: 'Pexels A',      group: 'Pexels', caption: 'Pexels — Fig. 3 (rows 1–3) in main paper' },
+    { id: 'fig3',  label: 'Pexels B',      group: 'Pexels', caption: 'Pexels — Fig. 3 (rows 4–6) in main paper' },
+    { id: 'fig4',  label: 'Pexels C',      group: 'Pexels', caption: 'Pexels' },
+    { id: 'fig5',  label: 'Pexels D',      group: 'Pexels', caption: 'Pexels' },
+    { id: 'fig7',  label: 'Pexels E',      group: 'Pexels', caption: 'Pexels' },
+    { id: 'fig10', label: 'Pexels F',      group: 'Pexels', caption: 'Pexels' },
+    { id: 'fig11', label: 'Pexels G',      group: 'Pexels', caption: 'Pexels' },
+    { id: 'fig12', label: 'Pexels H',      group: 'Pexels', caption: 'Pexels' },
+  ];
+
+  const ROW1 = [
+    { label: 'Start Frame',      isFrame: true },
+    { label: '(a) FILM' },
+    { label: '(b) DynamiCrafter' },
+    { label: '(c) TRF' },
+    { label: '(d) GI' },
+  ];
+  const ROW2 = [
+    { label: 'End Frame',        isFrame: true },
+    { label: '(e) ViBiD' },
+    { label: '(f) FCVG' },
+    { label: '(g) Ours + TRF',   isOurs: true },
+    { label: '(h) Ours + ViBiD', isOurs: true },
+  ];
+
+  const VIDEO_BASE = 'static/videos/comparisons';
+
+  (function () {
+    const tabsRoot = document.getElementById('scene-tabs');
+    const display  = document.getElementById('comparison-display');
+    if (!tabsRoot || !display) return;
+
+    // Build scene tabs grouped by dataset
+    const groups = {};
+    SCENES.forEach(s => { (groups[s.group] = groups[s.group] || []).push(s); });
+
+    Object.keys(groups).forEach(groupName => {
+      const wrap = document.createElement('div');
+      wrap.className = 'scene-group';
+      const lbl = document.createElement('div');
+      lbl.className = 'scene-group-label';
+      lbl.textContent = groupName;
+      wrap.appendChild(lbl);
+      groups[groupName].forEach(scene => {
+        const btn = document.createElement('button');
+        btn.className = 'scene-tab';
+        btn.textContent = scene.label;
+        btn.dataset.id = scene.id;
+        btn.addEventListener('click', () => selectScene(scene.id));
+        wrap.appendChild(btn);
+      });
+      tabsRoot.appendChild(wrap);
+    });
+
+    function renderHeaderCells(methods) {
+      return methods.map(m => {
+        const cls = m.isOurs ? 'is-ours' : (m.isFrame ? 'is-frame' : '');
+        return `<div class="row-header ${cls}">${m.label}</div>`;
+      }).join('');
+    }
+
+    function buildCard(scene) {
+      return `
+        <div class="comparison-card">
+          <div class="comparison-caption">
+            Scene: <span class="scene-name">${scene.label}</span> — ${scene.caption}
+          </div>
+          <div class="comparison-row">
+            <div class="row-headers">${renderHeaderCells(ROW1)}</div>
+            <video class="row-video" autoplay loop muted playsinline preload="metadata">
+              <source src="${VIDEO_BASE}/${scene.id}/Row1.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="comparison-row">
+            <div class="row-headers">${renderHeaderCells(ROW2)}</div>
+            <video class="row-video" autoplay loop muted playsinline preload="metadata">
+              <source src="${VIDEO_BASE}/${scene.id}/Row2.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      `;
+    }
+
+    function syncCurrentVideos() {
+      const vids = display.querySelectorAll('video');
+      if (vids.length < 2) return;
+      vids.forEach(v => { v.currentTime = 0; v.play().catch(() => {}); });
+      vids.forEach(v => {
+        v.addEventListener('timeupdate', () => {
+          vids.forEach(other => {
+            if (Math.abs(v.currentTime - other.currentTime) > 0.15) {
+              other.currentTime = v.currentTime;
+            }
+          });
+        });
+      });
+    }
+
+    function selectScene(id) {
+      const scene = SCENES.find(s => s.id === id);
+      if (!scene) return;
+      document.querySelectorAll('.scene-tab').forEach(t => {
+        t.classList.toggle('is-active', t.dataset.id === id);
+      });
+      display.classList.add('is-changing');
+      setTimeout(() => {
+        display.innerHTML = buildCard(scene);
+        display.classList.remove('is-changing');
+        syncCurrentVideos();
+      }, 150);
+    }
+
+    selectScene(SCENES[0].id);
+  })();
+  </script>
 </body>
 </html>
